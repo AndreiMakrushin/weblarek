@@ -8,7 +8,7 @@ export class AppApi {
         this.api = api;
     }
 
-    getProducts(): Promise<IProduct[]> {
+    getProducts(): Promise<{ total: number; items: IProduct[] }> {
         return this.api.get('/product/');
     }
 

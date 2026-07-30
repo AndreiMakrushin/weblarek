@@ -1,33 +1,33 @@
 import type { IProduct } from "../../types/index.ts";
 export class BasketModel {
-    items: IProduct[] = [];
+   private _items: IProduct[] = [];
 
     getItems(): IProduct[] {
-        return this.items;
+        return this._items;
     }
 
     addItem(item: IProduct): void {
-        this.items.push(item)
+        this._items.push(item)
     }
 
     removeItem(itemId: string): void {
-        this.items = this.items.filter((item) => item.id !== itemId)
+        this._items = this._items.filter((item) => item.id !== itemId)
     }
 
     clear(): void {
-        this.items = []
+        this._items = []
     }
 
     getTotalPrice(): number {
-        return this.items.reduce((acc, item) => acc + (item.price || 0), 0)
+        return this._items.reduce((acc, item) => acc + (item.price || 0), 0)
     }
 
     getCount(): number {
-        return this.items.length
+        return this._items.length
     }
 
     containsItem(itemId: string): boolean {
-        return this.items.some(item => item.id === itemId)
+        return this._items.some(item => item.id === itemId)
     }
 
 }

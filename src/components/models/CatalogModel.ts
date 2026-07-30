@@ -1,26 +1,26 @@
 import type { IProduct } from "../../types/index.ts";
 
 export class CatalogModel {
-items: IProduct[] = [];
-selectedItem: IProduct | null = null;
+private _items: IProduct[] = [];
+private _selectedItem: IProduct | null = null;
     
     setItems(items: IProduct[]): void {
-        this.items = items;
+        this._items = items;
     }
     getItems(): IProduct[] {
-        return this.items;
+        return this._items;
     }
 
     getItemById(id: string): IProduct | undefined {
-        return this.items.find(item => item.id === id);
+        return this._items.find(item => item.id === id);
     }
 
     setSelectedItem(item: IProduct): void {
-        this.selectedItem = item;
+        this._selectedItem = item;
     }
 
     getSelectedItem(): IProduct | null {
-        return this.selectedItem;
+        return this._selectedItem;
     }
 
 }
