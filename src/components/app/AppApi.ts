@@ -1,14 +1,14 @@
-import { Api } from '../base/Api';
-import { IProduct, IOrderData, IOrderResponse } from '../../types';
+import type{ IApi } from '../../types';
+import { IOrderData, IOrderResponse, IProductsResponse } from '../../types';
 
 export class AppApi {
-    private api: Api;
+    private api: IApi;
 
-    constructor(api: Api) {
+    constructor(api: IApi) {
         this.api = api;
     }
 
-    getProducts(): Promise<{ total: number; items: IProduct[] }> {
+    getProducts(): Promise<IProductsResponse> {
         return this.api.get('/product/');
     }
 

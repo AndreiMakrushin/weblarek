@@ -15,7 +15,7 @@ export interface IProduct {
 }
 
 export interface IBuyer {
-  payment: "card" | "cash" | "";
+  payment: TPaymentModel;
   address: string;
   email: string;
   phone: string;
@@ -23,7 +23,7 @@ export interface IBuyer {
 
 export interface IOrderData {
     items: string[];
-    payment: 'card' | 'cash';
+    payment: TPayment;
     email: string;
     phone: string;
     address: string;
@@ -34,3 +34,12 @@ export interface IOrderResponse {
     id: string;
     total: number;
 }
+
+export interface IProductsResponse{
+    total: number;
+    items: IProduct[]
+}
+
+export type TValidate = Partial<Record<keyof IBuyer, string>>
+export type TPayment = 'card' | 'cash'
+export type TPaymentModel = TPayment | '';

@@ -1,7 +1,7 @@
-import type { IBuyer } from "../../types/index.ts";
+import type { IBuyer, TValidate, TPaymentModel } from "../../types/index.ts";
 
 export class BuyerModel{
-private _payment: 'card' | 'cash' | '' = '';
+private _payment: TPaymentModel = '';
 private _address: string = '';
 private _email: string = '';
 private _phone: string = '';
@@ -29,8 +29,8 @@ private _phone: string = '';
         this._phone = ''
     }
 
-    validate(): Partial<Record<keyof IBuyer, string>> {
-        const errors: Partial<Record<keyof IBuyer, string>> = {};
+    validate(): TValidate {
+        const errors: TValidate = {};
 
         if (this._payment === '') {
             errors.payment = 'Не выбран способ оплаты';
