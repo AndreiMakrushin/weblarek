@@ -106,33 +106,39 @@ Presenter - презентер содержит основную логику п
 `emit<T extends object>(event: string, data?: T): void` - инициализация события. При вызове события в метод передается название события и объект с данными, который будет использован как аргумент для вызова обработчика.  
 `trigger<T extends object>(event: string, context?: Partial<T>): (data: T) => void` - возвращает функцию, при вызове которой инициализируется требуемое в параметрах событие с передачей в него данных из второго параметра.
 
-```typescript
 Данные:
 
 Товар
 Данный интерфейс используется для карточек товара
 
+```typescript
 interface IProduct {
-id: string;
-title: string;
-image: string;
-category: string;
-price: number | null;
-description: string;
+  id: string;
+  title: string;
+  image: string;
+  category: string;
+  price: number | null;
+  description: string;
 }
+```
 
 Покупатель
 Данный интерфейс используется для данных пользователя
+
+```typescript
 interface IBuyer {
-payment: 'card' | 'cash' | '';
-address: string;
-email: string;
-phone: string;
+  payment: "card" | "cash" | "";
+  address: string;
+  email: string;
+  phone: string;
 }
+```
 
 Модели данных:
 
 Класс отвечает за хранение и управление данными о товарах, доступных в приложении. Обеспечивает доступ к списку всех товаров и к выбранному для просмотра товару.
+
+```typescript
 class CatalogModel {
 items: IProduct[]; — массив всех товаров, доступных для покупки
 selectedItem: IProduct | null; — товар, выбранный пользователем для детального просмотра
@@ -163,8 +169,11 @@ selectedItem: IProduct | null; — товар, выбранный пользов
     }
 
 }
+```
 
 Класс отвечает за хранение и управление товарами, которые пользователь выбрал для покупки. Предоставляет методы для добавления, удаления и получения информации о товарах в корзине.
+
+```typescript
 class BasketModel {
 items: IProduct[]; — массив товаров, выбранных покупателем для покупки
 
@@ -204,8 +213,11 @@ items: IProduct[]; — массив товаров, выбранных поку�
     }
 
 }
+```
 
 Класс отвечает за хранение и управление данными покупателя, необходимыми для оформления заказа. Обеспечивает сохранение, получение, очистку и валидацию данных.
+
+```typescript
 class BuyerModel{
 payment: 'card' | 'cash' | ''; — способ оплаты
 address: string; — адрес доставки
@@ -260,4 +272,5 @@ phone: string; — номер телефона
     }
 
 }
+
 ```
