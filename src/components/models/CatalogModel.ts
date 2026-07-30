@@ -1,8 +1,8 @@
 import type { IProduct } from "../../types/index.ts";
 
 export class CatalogModel {
-items!: IProduct[];
-selectedItem!: IProduct | null;
+items: IProduct[] = [];
+selectedItem: IProduct | null = null;
     
     setItems(items: IProduct[]): void {
         this.items = items;

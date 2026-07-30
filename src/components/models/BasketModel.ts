@@ -1,6 +1,6 @@
 import type { IProduct } from "../../types/index.ts";
 export class BasketModel {
-    items!: IProduct[];
+    items: IProduct[] = [];
 
     getItems(): IProduct[] {
         return this.items;

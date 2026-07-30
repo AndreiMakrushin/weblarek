@@ -1,10 +1,10 @@
 import type { IBuyer } from "../../types/index.ts";
 
 export class BuyerModel{
-payment!: 'card' | 'cash' | '';
-address!: string;
-email!: string;
-phone!: string;
+payment: 'card' | 'cash' | '' = '';
+address: string = '';
+email: string = '';
+phone: string = '';
 
     setData(data: Partial<IBuyer>): void{
        if(data.payment !== undefined) this.payment = data.payment
@@ -44,7 +44,6 @@ phone!: string;
         if (this.phone === '') {
             errors.phone = 'Укажите телефон';
         }
-
         return errors;
 
     }
