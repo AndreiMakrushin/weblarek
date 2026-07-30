@@ -1,4 +1,7 @@
 export type ApiPostMethods = 'POST' | 'PUT' | 'DELETE';
+export type TValidate = Partial<Record<keyof IBuyer, string>>
+export type TPayment = 'card' | 'cash'
+export type TPaymentModel = TPayment | '';
 
 export interface IApi {
     get<T extends object>(uri: string): Promise<T>;
@@ -40,6 +43,3 @@ export interface IProductsResponse{
     items: IProduct[]
 }
 
-export type TValidate = Partial<Record<keyof IBuyer, string>>
-export type TPayment = 'card' | 'cash'
-export type TPaymentModel = TPayment | '';
