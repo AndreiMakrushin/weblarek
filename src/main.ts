@@ -1,9 +1,10 @@
 import './scss/styles.scss';
 import { Api } from './components/base/Api';
+import {API_URL} from './utils/constants';
 import { AppApi } from './components/app/AppApi';
 import { CatalogModel } from "./components/models/CatalogModel";
 
-const api = new Api(import.meta.env.VITE_API_ORIGIN);
+const api = new Api(API_URL);
 const appApi = new AppApi(api);
 const catalogModel = new CatalogModel();
 
