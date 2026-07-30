@@ -108,7 +108,8 @@ Presenter - презентер содержит основную логику п
 
 Данные:
 
-Товар `<br>`
+Товар
+
 Данный интерфейс используется для карточек товара
 
 ```typescript
@@ -122,7 +123,8 @@ interface IProduct {
 }
 ```
 
-Покупатель `<br>`
+Покупатель
+
 Данный интерфейс используется для данных пользователя
 
 ```typescript
@@ -273,4 +275,44 @@ phone: string; — номер телефона
 
 }
 
+```
+
+Слой коммуникации
+
+Класс отвечает за взаимодействие с сервером. Использует композицию с классом Api для выполнения HTTP-запросов. Обеспечивает получение списка товаров и отправку данных заказа.
+
+```typescript
+class AppApi {
+  private api: Api;
+
+  constructor(api: Api) {
+    this.api = api;
+  }
+
+  getProducts(): Promise<IProduct[]> {
+    return this.api.get("/product/", () => []);
+  }
+
+  postOrder(data: IOrderData): Promise<IOrderResponse> {
+    return this.api.post("/order/", data, () => ({}) as IOrderResponse);
+  }
+}
+```
+
+```typescript
+interface IOrderData {
+  items: string[];
+  payment: "card" | "cash";
+  email: string;
+  phone: string;
+  address: string;
+  total: number;
+}
+```
+
+```typescript
+export interface IOrderResponse {
+  id: string;
+  total: number;
+}
 ```

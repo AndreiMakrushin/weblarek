@@ -1,0 +1,26 @@
+import type { IProduct } from "../../types/index.ts";
+
+export class CatalogModel {
+items!: IProduct[];
+selectedItem!: IProduct | null;
+    
+    setItems(items: IProduct[]): void {
+        this.items = items;
+    }
+    getItems(): IProduct[] {
+        return this.items;
+    }
+
+    getItemById(id: string): IProduct | undefined {
+        return this.items.find(item => item.id === id);
+    }
+
+    setSelectedItem(item: IProduct): void {
+        this.selectedItem = item;
+    }
+
+    getSelectedItem(): IProduct | null {
+        return this.selectedItem;
+    }
+
+}
