@@ -43,3 +43,13 @@ export interface IProductsResponse{
     items: IProduct[]
 }
 
+export interface ICardGeneral{
+    id?: string | number;
+    title: string;
+    price: number | null;
+}
+
+export interface ICardCatalog extends ICardGeneral{
+    category: string;
+    image: string;
+}

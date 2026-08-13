@@ -7,11 +7,21 @@ export class AppApi {
         this.api = api;
     }
 
-    getProducts(): Promise<IProductsResponse> {
-        return this.api.get('/product/');
+   async getProducts(): Promise<IProductsResponse> {
+        try{
+            return await this.api.get('/product/');
+        }catch(error){
+            console.error('Ошибка при получении товаров:', error);
+            throw error
+        }
     }
 
-    postOrder(data: IOrderData): Promise<IOrderResponse> {
-        return this.api.post('/order/', data, 'POST');
+   async postOrder(data: IOrderData): Promise<IOrderResponse> {
+        try{
+            return this.api.post('/order/', data, 'POST');
+        }catch(error){
+            console.error('Ошибка при отправке заказа:', error);
+            throw error
+        }
     }
 }
