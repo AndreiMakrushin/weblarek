@@ -21,7 +21,7 @@ private _selectedItem: IProduct | null = null;
 
     setSelectedItem(item: IProduct): void {
         this._selectedItem = item;
-        this.events.emit('catalog:setSelectedItem', {
+        this.events.emit('catalog:open', {
             id: item.id
         });
     }

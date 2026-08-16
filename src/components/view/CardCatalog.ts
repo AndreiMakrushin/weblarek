@@ -1,10 +1,11 @@
-import { categoryMap, CDN_URL } from "../../utils/constants"
+import { categoryMap, CDN_URL } from "../../utils/constants";
 import { CardGeneral } from "./CardGeneral";
 import { ensureElement } from '../../utils/utils';
+import type { ICardCatalog } from "../../types/index";
 
 type CategoryKey = keyof typeof categoryMap;
 
-export class CardCatalog extends CardGeneral{
+export class CardCatalog extends CardGeneral {
     private _imageElement: HTMLImageElement;
     private _categoryElement: HTMLElement;
 
@@ -17,13 +18,13 @@ export class CardCatalog extends CardGeneral{
             onAction();
         });
     }
+    set data(value: ICardCatalog) {
+        super.data = value;
 
-    set image(value: string) {
-        this.setImage(this._imageElement, `${CDN_URL}/${value}`);
-    }
+        this.setImage(this._imageElement, `${CDN_URL}/${value.image}`);
+        
+        this._categoryElement.textContent = value.category;
+        this._categoryElement.className = `card__category ${categoryMap[value.category as CategoryKey]}`;
 
-    set category(value: string) {
-        this._categoryElement.textContent = value;
-        this._categoryElement.classList.add(categoryMap[value as CategoryKey]);
     }
 }

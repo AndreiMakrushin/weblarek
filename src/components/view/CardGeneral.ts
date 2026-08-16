@@ -14,6 +14,6 @@ export class CardGeneral extends Component<ICardGeneral> {
 
     set data(value: ICardGeneral) {
         this._titleElement.textContent = value.title ?? 'Нет названия';
-        this._priceElement.textContent = value.price ? `${value.price} синапсов` : 'Недоступно';
+        this._priceElement.textContent = value.price ? `${value.price} синапсов` : this._priceElement.style.display = 'none';
     }
 }

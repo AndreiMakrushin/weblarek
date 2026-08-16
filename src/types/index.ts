@@ -44,7 +44,7 @@ export interface IProductsResponse{
 }
 
 export interface ICardGeneral{
-    id?: string | number;
+    id: string;
     title: string;
     price: number | null;
 }
@@ -52,4 +52,30 @@ export interface ICardGeneral{
 export interface ICardCatalog extends ICardGeneral{
     category: string;
     image: string;
+}
+
+export interface ICardPreview extends ICardGeneral{
+    image: string;
+    category: string;
+    description: string;
+    inBasket?: boolean;
+}
+
+export interface IOrderData {
+    items: string[];
+    payment: TPayment;
+    email: string;
+    phone: string;
+    address: string;
+    total: number;
+}
+
+export interface IOrderResponse {
+    id: string;
+    total: number;
+}
+
+export interface IProductsResponse {
+    total: number;
+    items: IProduct[];
 }
