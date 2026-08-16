@@ -316,3 +316,359 @@ export interface IOrderResponse {
   total: number;
 }
 ```
+
+Слой представления (View)
+
+Слой представления отвечает за отображение данных и взаимодействие с пользователем. Все классы представления наследуются от базового класса Component и используют шаблоны из HTML для генерации DOM-элементов.
+
+Базовые классы
+
+Класс `typescript CardGeneral `
+Базовый класс для всех карточек товара. Содержит общую логику для отображения названия и цены.
+
+Назначение: Родительский класс для всех карточек (каталог, превью, корзина).
+
+Поля класса:
+
+`typescript \_titleElement: HTMLElement ` — элемент для отображения названия товара
+
+`typescript \_priceElement: HTMLElement ` — элемент для отображения цены
+
+Сеттеры:
+
+`typescript set data(value: ICardGeneral) ` — устанавливает название и цену товара
+
+Класс `typescript Form `
+Базовый класс для всех форм. Содержит общую логику для отображения ошибок и управления кнопкой отправки.
+
+Назначение: Родительский класс для форм заказа и контактов.
+
+Поля класса:
+
+`typescript \_errorElement: HTMLElement ` — элемент для отображения ошибок
+
+`typescript \_handleButton: HTMLButtonElement ` — кнопка отправки формы
+
+`typescript \_form: HTMLFormElement ` — DOM-элемент формы
+
+Сеттеры:
+
+`typescript set errors(errors: string[]) ` — отображает ошибки и блокирует/разблокирует кнопку
+
+Компоненты представления
+
+Класс `typescript Header `
+Отвечает за отображение шапки сайта с корзиной и счётчиком товаров.
+
+Назначение: Управление верхней панелью навигации.
+
+Поля класса:
+
+`typescript basketButton: HTMLButtonElement ` — кнопка открытия корзины
+
+`typescript counterElement: HTMLElement ` — элемент для отображения количества товаров
+
+Сеттеры:
+
+`typescript set counter(value: number) ` — обновляет счётчик товаров в корзине
+
+События:
+
+`typescript basket:open ` — генерируется при клике на кнопку корзины
+
+Класс `typescript Gallery `
+Отвечает за отображение каталога товаров на главной странице.
+
+Назначение: Контейнер для всех карточек товаров.
+
+Поля класса:
+
+`typescript catalogElement: HTMLElement ` — DOM-элемент для вставки карточек
+
+Сеттеры:
+
+`typescript set catalog(items: HTMLElement[]) ` — заменяет содержимое галереи на переданный массив карточек
+
+Класс `typescript CardCatalog `
+Отвечает за отображение карточки товара в каталоге.
+
+Назначение: Представление товара в списке на главной странице.
+
+Поля класса:
+
+`typescript \_imageElement: HTMLImageElement ` — изображение товара
+
+`typescript \_categoryElement: HTMLElement ` — категория товара
+
+Сеттеры:
+
+`typescript set data(value: ICardCatalog) ` — устанавливает все данные товара
+
+События:
+
+`typescript catalog:setSelectedItem ` — генерируется при клике на карточку
+
+Класс `typescript CardPreview `
+Отвечает за отображение детальной карточки товара в модальном окне.
+
+Назначение: Показ полной информации о товаре с кнопкой добавления/удаления из корзины.
+
+Поля класса:
+
+`typescript \_imageElement: HTMLImageElement ` — изображение товара
+
+`typescript \_categoryElement: HTMLElement ` — категория товара
+
+`typescript \_descriptionElement: HTMLElement ` — описание товара
+
+`typescript \_buttonElement: HTMLButtonElement ` — кнопка "Купить"/"Удалить из корзины"
+
+`typescript \_id: string ` — идентификатор товара
+
+Сеттеры:
+
+`typescript set data(value: ICardPreview) ` — устанавливает все данные и управляет состоянием кнопки
+
+События:
+
+`typescript card:addToBasket ` — генерируется при клике на кнопку
+
+Класс `typescript CardBasket `
+Отвечает за отображение товара в корзине.
+
+Назначение: Представление товара в списке корзины с возможностью удаления.
+
+Поля класса:
+
+`typescript \_idElement: HTMLElement ` — порядковый номер товара
+
+\_deleteButton: HTMLButtonElement — кнопка удаления
+
+Сеттеры:
+
+`typescript set id(value: string) ` — устанавливает порядковый номер
+
+События:
+
+`typescript basket:delete ` — генерируется при клике на кнопку удаления
+
+Класс `typescript Basket `
+Отвечает за отображение корзины в модальном окне.
+
+Назначение: Список выбранных товаров с общей стоимостью и кнопкой оформления.
+
+Поля класса:
+
+`typescript \_listElement: HTMLUListElement ` — список товаров
+
+`typescript \_buttonElement: HTMLButtonElement ` — кнопка "Оформить"
+
+`typescript \_totalPriceElement: HTMLElement ` — общая стоимость
+
+Сеттеры:
+
+`typescript set data(value: IBasket) ` — обновляет список, стоимость и состояние кнопки
+
+События:
+
+`typescript order:placeAnOrder ` — генерируется при клике на кнопку "Оформить"
+
+Класс `typescript Order `
+Отвечает за форму выбора способа оплаты и ввода адреса.
+
+Назначение: Первый шаг оформления заказа.
+
+Поля класса:
+
+`typescript \_cardButton: HTMLButtonElement ` — кнопка выбора оплаты картой
+
+`typescript \_cashButton: HTMLButtonElement ` — кнопка выбора оплаты наличными
+
+`typescript \_addressInput: HTMLInputElement ` — поле ввода адреса
+
+Сеттеры:
+
+`typescript set data(value: IOrder) ` — устанавливает способ оплаты и адрес
+
+События:
+
+`typescript customer:change ` — генерируется при изменении способа оплаты или адреса
+
+`typescript order:submit ` — генерируется при отправке формы
+
+Класс `typescript Contacts `
+Отвечает за форму ввода контактных данных.
+
+Назначение: Второй шаг оформления заказа (email и телефон).
+
+Поля класса:
+
+`typescript \_phoneElement: HTMLInputElement ` — поле ввода телефона
+
+`typescript \_emailElement: HTMLInputElement ` — поле ввода email
+
+Сеттеры:
+
+`typescript set data(value: IContactsData) ` — устанавливает телефон и email
+
+События:
+
+`typescript contacts:change ` — генерируется при изменении данных в полях
+
+`typescript contacts:submit ` — генерируется при отправке формы
+
+Класс `typescript Success `
+Отвечает за отображение сообщения об успешном оформлении заказа.
+
+Назначение: Подтверждение успешной оплаты с указанием списанной суммы.
+
+Поля класса:
+
+`typescript \_totalElement: HTMLElement ` — элемент с суммой списания
+
+`typescript \_closeButton: HTMLButtonElement ` — кнопка закрытия
+
+Сеттеры:
+
+`typescript set total(value: number) ` — устанавливает сумму списания
+
+События:
+
+`typescript success:close ` — генерируется при клике на кнопку закрытия
+
+Класс `typescript Modal `
+Отвечает за отображение модального окна.
+
+Назначение: Управление открытием и закрытием модальных окон.
+
+Поля класса:
+
+`typescript \_closeButton: HTMLButtonElement ` — кнопка закрытия
+
+`typescript \_modalContent: HTMLElement ` — контейнер для контента
+
+`typescript \_isOpen: boolean ` — флаг состояния окна
+
+Методы:
+
+`typescript open(content: HTMLElement): void ` — открывает модальное окно с переданным контентом
+
+`typescript close(): void ` — закрывает модальное окно
+
+`typescript isOpen(): boolean ` — возвращает текущее состояние окна
+
+События:
+
+`typescript modal:open ` — генерируется при открытии
+
+`typescript modal:close ` — генерируется при закрытии
+
+События приложения
+
+Все события, используемые в приложении для взаимодействия между слоями:
+
+<!--  -->
+
+Презентер (Presenter)
+
+Презентер реализован в файле src/main.ts и содержит всю логику приложения. Он связывает модели данных и представления через обработку событий.
+
+Ответственность презентера
+
+1. Инициализация — создание экземпляров всех компонентов (моделей, представлений, API)
+
+2. Обработка событий — подписка на все события и выполнение соответствующих действий
+
+3. Координация — связывание моделей и представлений, обновление данных и отображения
+
+Основные сценарии
+
+Загрузка товаров
+
+1. Запрос к серверу через AppApi.getProducts()
+
+2. Сохранение в CatalogModel.setItems()
+
+3. Генерация события catalog:setItems
+
+4. Отрисовка галереи через Gallery.catalog
+
+Открытие карточки товара
+
+1. Клик на карточку в каталоге > catalog:setSelectedItem
+
+2. Получение товара по ID через CatalogModel.getItemById()
+
+3. Сохранение выбранного товара > catalog:open
+
+4. Создание CardPreview с данными товара и состоянием в корзине
+
+5. Открытие модального окна с карточкой
+
+Работа с корзиной
+
+1. Добавление/удаление товара через card:addToBasket
+
+2. Обновление BasketModel
+
+3. Генерация basket:change
+
+4. Обновление счётчика в Header
+
+5. Обновление корзины в модалке (если она открыта)
+
+Оформление заказа
+
+1. Открытие корзины > basket:open
+
+2. Переход к заказу > order:placeAnOrder
+
+3. Заполнение формы заказа (Order)
+
+4. Переход к контактам > order:submit
+
+5. Заполнение формы контактов (Contacts)
+
+6. Отправка заказа на сервер > contacts:submit
+
+7. Получение ответа > показ Success
+
+8. Очистка корзины и данных покупателя
+
+Ключевые переменные
+
+1. events — экземпляр EventEmitter для всех событий
+
+2. catalogModel — модель каталога
+
+3. basketModel — модель корзины
+
+4. buyerModel — модель покупателя
+
+5. appApi — коммуникационный слой
+
+Все компоненты представления (Header, Gallery, Modal, Basket, Order, Contacts, Success)
+
+```typescript
+// Данные для заказа
+export interface IOrderData {
+  items: string[];
+  payment: TPayment;
+  email: string;
+  phone: string;
+  address: string;
+  total: number;
+}
+
+// Ответ сервера после заказа
+export interface IOrderResponse {
+  id: string;
+  total: number;
+}
+
+// Ответ сервера с товарами
+export interface IProductsResponse {
+  total: number;
+  items: IProduct[];
+}
+```
