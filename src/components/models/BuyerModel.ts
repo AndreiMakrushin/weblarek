@@ -1,4 +1,5 @@
 import type { IBuyer, TValidate, TPaymentModel } from "../../types/index.ts";
+import { IEvents } from "../base/Events";
 
 export class BuyerModel{
 private _payment: TPaymentModel = '';
@@ -6,11 +7,15 @@ private _address: string = '';
 private _email: string = '';
 private _phone: string = '';
 
+    constructor(private events: IEvents){}
+
     setData(data: Partial<IBuyer>): void{
        if(data.payment !== undefined) this._payment = data.payment
        if(data.address !== undefined) this._address = data.address
        if(data.email !== undefined) this._email = data.email
        if(data.phone !== undefined) this._phone = data.phone
+
+       this.events.emit('customer:changed');
     }
 
     getData(): IBuyer{
@@ -27,6 +32,8 @@ private _phone: string = '';
         this._address = ''
         this._email = ''
         this._phone = ''
+
+        this.events.emit('customer:changed');
     }
 
     validate(): TValidate {

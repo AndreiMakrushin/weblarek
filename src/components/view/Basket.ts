@@ -5,7 +5,7 @@ import { IEvents } from "../base/Events";
 interface IBasket {
     list: HTMLElement[]
     totalPrice: number;
-    state: boolean
+    isOrderAvailable: boolean
 }
 
 export class Basket extends Component<IBasket> {
@@ -19,16 +19,14 @@ export class Basket extends Component<IBasket> {
         this._totalPriceElement = ensureElement<HTMLElement>('.basket__price', this.container);
 
         this._buttonElement.addEventListener('click', () => {
-            this.events.emit('order:placeAnOrder')
+            this.events.emit('basket:submit')
         })
     }
 
     set data(value: IBasket) {
-        this._listElement.innerHTML = '';
-
-        value.list.forEach(item => this._listElement.appendChild(item));
+        this._listElement.replaceChildren(...value.list);
         
-        this._totalPriceElement.textContent = String(value.totalPrice);
-        this._buttonElement.disabled = !value.state;
+        this._totalPriceElement.textContent = String(value.totalPrice) + ' синапсов';
+        this._buttonElement.disabled = !value.isOrderAvailable;
     }
 }

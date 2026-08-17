@@ -11,7 +11,6 @@ export class CardPreview extends CardGeneral {
     private _categoryElement: HTMLElement;
     private _descriptionElement: HTMLElement;
     private _buttonElement: HTMLButtonElement;
-    private _id: string = '';
 
     constructor(container: HTMLElement, private events: IEvents) {
         super(container);
@@ -22,20 +21,17 @@ export class CardPreview extends CardGeneral {
 
         this._buttonElement.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (this._id) {
-                this.events.emit('card:addToBasket', { id: this._id });
-            }
+            this.events.emit('preview:submit');
         });
     }
 
     set data(value: ICardPreview) {
         super.data = value;
-        this._id = value.id;
         
         this.setImage(this._imageElement, `${CDN_URL}/${value.image}`);
         this._categoryElement.textContent = value.category;
         this._categoryElement.className = `card__category ${categoryMap[value.category as CategoryKey]}`;
-        this._descriptionElement.textContent = value.description ?? 'Описание отсутствует';
+        this._descriptionElement.textContent = value.description;
 
         if (value.price === null) {
             this._buttonElement.disabled = true;

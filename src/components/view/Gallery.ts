@@ -1,5 +1,4 @@
 import { Component } from "../base/Component";
-import { ensureElement } from '../../utils/utils';
 
 interface IGalleryData{
     catalog: HTMLElement[]
@@ -10,13 +9,12 @@ export class Gallery extends Component<IGalleryData> {
 
     constructor(container: HTMLElement) {
         super(container)
-        this.catalogElement = ensureElement<HTMLElement>('.gallery', this.container);
+        this.catalogElement = container;
     }
 
 
     set catalog(value: HTMLElement[]) {
-        this.catalogElement.innerHTML = ''
-        value.forEach(item => this.catalogElement.appendChild(item))
+        this.catalogElement.replaceChildren(...value)
     }
 
 }

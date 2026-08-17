@@ -11,17 +11,17 @@ export class BasketModel {
 
     addItem(item: IProduct): void {
         this._items.push(item)
-        this.events.emit('basket:change')
+        this.events.emit('basket:changed')
     }
 
     removeItem(itemId: string): void {
     this._items = this._items.filter((item) => item.id !== itemId);
-    this.events.emit('basket:change');
+    this.events.emit('basket:changed');
 }
 
     clear(): void {
         this._items = []
-        this.events.emit('basket:change')
+        this.events.emit('basket:changed')
     }
 
     getTotalPrice(): number {

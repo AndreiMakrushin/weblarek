@@ -9,7 +9,7 @@ private _selectedItem: IProduct | null = null;
     
     setItems(items: IProduct[]): void {
         this._items = items;
-        this.events.emit('catalog:setItems');
+        this.events.emit('catalog:changed');
     }
     getItems(): IProduct[] {
         return this._items;
@@ -21,9 +21,7 @@ private _selectedItem: IProduct | null = null;
 
     setSelectedItem(item: IProduct): void {
         this._selectedItem = item;
-        this.events.emit('catalog:open', {
-            id: item.id
-        });
+        this.events.emit('catalog:selected');
     }
 
     getSelectedItem(): IProduct | null {

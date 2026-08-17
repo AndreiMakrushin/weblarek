@@ -17,30 +17,24 @@ export class Contacts extends Form {
         this._phoneElement = ensureElement<HTMLInputElement>('.form__input[name="phone"]', this.container);
         this._emailElement = ensureElement<HTMLInputElement>('.form__input[name="email"]', this.container);
 
-        const onChange = () => {
-            this.events.emit('contacts:change', this._getFormData());
-        };
+        this._phoneElement.addEventListener('input', (event) => {
+            const target = event.target as HTMLInputElement;
+            this.events.emit('contacts:phone', { phone: target.value.trim() });
+        });
 
-        this._phoneElement.addEventListener('input', onChange);
-        this._emailElement.addEventListener('input', onChange);
-
-        this._handleButton.disabled = true
+        this._emailElement.addEventListener('input', (event) => {
+            const target = event.target as HTMLInputElement;
+            this.events.emit('contacts:email', { email: target.value.trim() });
+        });
 
         this.container.addEventListener('submit', (event) => {
             event.preventDefault();
-            this.events.emit('contacts:submit', this._getFormData());
+            this.events.emit('contacts:submit');
         });
     }
 
-    protected _getFormData(): IContactsData {
-        return {
-            phone: this._phoneElement.value,
-            email: this._emailElement.value
-        };
-    }
-
     set data(value: IContactsData) {
-        this._phoneElement.value = value.phone;
-        this._emailElement.value = value.email;
+        this._phoneElement.value = value.phone ?? '';
+        this._emailElement.value = value.email ?? '';
     }
 }

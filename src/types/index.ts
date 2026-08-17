@@ -61,21 +61,3 @@ export interface ICardPreview extends ICardGeneral{
     inBasket?: boolean;
 }
 
-export interface IOrderData {
-    items: string[];
-    payment: TPayment;
-    email: string;
-    phone: string;
-    address: string;
-    total: number;
-}
-
-export interface IOrderResponse {
-    id: string;
-    total: number;
-}
-
-export interface IProductsResponse {
-    total: number;
-    items: IProduct[];
-}
