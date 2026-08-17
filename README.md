@@ -556,23 +556,29 @@ export interface IOrderResponse {
 События приложения
 Все события, используемые в приложении для взаимодействия между слоями:
 
-Событие Источник Описание
-`catalog:changed CatalogModel `Каталог товаров обновлён
-`catalog:selected CatalogModel `Выбранный товар изменился
-`card:selected CardCatalog `Пользователь выбрал карточку
-`preview:submit CardPreview `Нажата кнопка в карточке товара
-`basket:open Header `Открытие корзины
-`basket:delete CardBasket `Удаление товара из корзины
-`basket:changed BasketModel `Корзина изменилась
-`basket:submit Basket `Оформление заказа
-`order:payment Order `Выбран способ оплаты
-`order:address Order `Введён адрес доставки
-`order:submit Order `Переход к контактам
-`contacts:phone Contacts `Введён телефон
-`contacts:email Contacts `Введён email
-`contacts:submit Contacts `Отправка заказа
-`customer:changed BuyerModel `Данные покупателя изменились
-`success:close Success `Закрытие окна успеха
+### События приложения
+
+Все события, используемые в приложении для взаимодействия между слоями:
+
+| Событие            | Источник       | Описание                        |
+| ------------------ | -------------- | ------------------------------- |
+| `catalog:changed`  | `CatalogModel` | Каталог товаров обновлён        |
+| `catalog:selected` | `CatalogModel` | Выбранный товар изменился       |
+| `card:selected`    | `CardCatalog`  | Пользователь выбрал карточку    |
+| `preview:submit`   | `CardPreview`  | Нажата кнопка в карточке товара |
+| `basket:open`      | `Header`       | Открытие корзины                |
+| `basket:delete`    | `CardBasket`   | Удаление товара из корзины      |
+| `basket:changed`   | `BasketModel`  | Корзина изменилась              |
+| `basket:submit`    | `Basket`       | Оформление заказа               |
+| `order:payment`    | `Order`        | Выбран способ оплаты            |
+| `order:address`    | `Order`        | Введён адрес доставки           |
+| `order:submit`     | `Order`        | Переход к контактам             |
+| `contacts:phone`   | `Contacts`     | Введён телефон                  |
+| `contacts:email`   | `Contacts`     | Введён email                    |
+| `contacts:submit`  | `Contacts`     | Отправка заказа                 |
+| `customer:changed` | `BuyerModel`   | Данные покупателя изменились    |
+| `success:close`    | `Success`      | Закрытие окна успеха            |
+
 Презентер (Presenter)
 Презентер реализован в файле src/main.ts и содержит всю логику приложения. Он связывает модели данных и представления через обработку событий.
 
