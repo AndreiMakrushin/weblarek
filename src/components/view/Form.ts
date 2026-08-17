@@ -12,10 +12,8 @@ interface IForm {
 export class Form extends Component<IForm> {
     protected _errorElement: HTMLElement;
     protected _handleButton: HTMLButtonElement;
-    protected _form: HTMLFormElement
     constructor(container: HTMLFormElement) {
         super(container);
-        this._form = container
         this._errorElement = ensureElement<HTMLElement>('.form__errors', this.container);
         this._handleButton = ensureElement<HTMLButtonElement>('.button[type="submit"]', this.container);
     }
